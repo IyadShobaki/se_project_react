@@ -1,7 +1,7 @@
 import "./Footer.css";
 function Footer() {
   return (
-    <footer class="footer">
+    <footer className="footer">
       <p className="footer__text">Developed by Iyad Shobaki</p>
       <p className="footer__text">
         &copy; {new Date().getFullYear() !== 2025 && "2025 - "}{" "}

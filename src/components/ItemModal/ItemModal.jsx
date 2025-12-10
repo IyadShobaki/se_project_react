@@ -2,7 +2,7 @@ import "./ItemModal.css";
 function ItemModal({ activeModal, card, onClose }) {
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
-      <dvi className="modal__container modal__container_type_image">
+      <div className="modal__container modal__container_type_image">
         <button
           onClick={onClose}
           type="button"
@@ -17,7 +17,7 @@ function ItemModal({ activeModal, card, onClose }) {
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>
-      </dvi>
+      </div>
     </div>
   );
 }
