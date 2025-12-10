@@ -1,0 +1,14 @@
+import "./Footer.css";
+function Footer() {
+  return (
+    <footer class="footer">
+      <p className="footer__text">Developed by Iyad Shobaki</p>
+      <p className="footer__text">
+        &copy; {new Date().getFullYear() !== 2025 && "2025 - "}{" "}
+        {new Date().getFullYear()}
+      </p>
+    </footer>
+  );
+}
+
+export default Footer;
