@@ -29,3 +29,9 @@
 .modal__weather {
   margin: 0;
 }
+
+@media (max-width: 820px) {
+  .modal__container_type_image {
+    max-width: 343px;
+  }
+}

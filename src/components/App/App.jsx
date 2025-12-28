@@ -19,18 +19,18 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
-  function handleCardClick(card) {
+  const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
-  }
+  };
 
-  function handleAddClick() {
+  const handleAddClick = () => {
     setActiveModal("add-garment");
-  }
+  };
 
-  function closeActiveModal() {
+  const closeActiveModal = () => {
     setActiveModal("");
-  }
+  };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)

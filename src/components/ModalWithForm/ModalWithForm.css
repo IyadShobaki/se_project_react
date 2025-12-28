@@ -146,3 +146,10 @@
   line-height: 20px;
   color: #ffffff;
 }
+
+@media (max-width: 820px) {
+  .modal {
+    align-items: flex-end;
+    z-index: 3;
+  }
+}
