@@ -4,6 +4,8 @@ import "./Header.css";
 import logo from "../../assets/images/logo.svg";
 import avatar from "../../assets/images/avatar.png";
 
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+
 function Header({ handleAddClick, weatherData }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -21,6 +23,7 @@ function Header({ handleAddClick, weatherData }) {
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
+
       <button className="header__toggler-btn" onClick={toggleNav}>
         {isNavOpen ? "\u2715" : "\u2550"}
       </button>
@@ -29,6 +32,7 @@ function Header({ handleAddClick, weatherData }) {
           isNavOpen ? "header__toggler_is-active" : ""
         }`}
       >
+        <ToggleSwitch />
         <button
           onClick={handleAddClick}
           type="button"
