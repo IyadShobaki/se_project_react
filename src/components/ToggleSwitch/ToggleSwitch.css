@@ -33,25 +33,42 @@
   cursor: pointer;
 }
 
+.toggle-switch:hover .toggle-switch__checkbox:not(:checked) {
+  left: 2px;
+  transition: left 0.3s ease-in-out;
+}
+.toggle-switch__checkbox:not(:checked) {
+  left: 0;
+  transition: left 0.3s ease-in-out;
+}
+.toggle-switch:hover .toggle-switch__checkbox:checked {
+  left: 25px;
+  transition: left 0.3s ease-in-out;
+}
 .toggle-switch__checkbox:checked {
   left: 28px;
   transition: left 0.3s ease-in-out;
 }
 
-.toggle-switch__checkbox:not(:checked) {
-  left: 0;
-  transition: left 0.3s ease-in-out;
-}
-
 .toggle-switch__span {
   margin: 0;
-  padding: 4px 0 0;
+  padding: 2px 0 0;
   color: #7e7e7e;
   z-index: 1;
+  font-size: 14px;
+  line-height: 1;
 }
 .toggle-switch:hover .toggle-switch__span_inactive {
   color: #000;
+  transition: color 0.4s ease-in-out;
 }
 .toggle-switch__span_active {
   color: #fff;
+  transition: color 0.4s ease-in-out;
+}
+
+@media (max-width: 840px) {
+  .toggle-switch {
+    order: 1;
+  }
 }
