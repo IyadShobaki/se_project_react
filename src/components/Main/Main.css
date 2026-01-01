@@ -1,3 +1,6 @@
+.main {
+  min-height: 550px;
+}
 .cards {
   margin-top: 40px;
 }
