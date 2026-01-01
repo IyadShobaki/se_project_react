@@ -7,9 +7,12 @@ import Loading from "../Loading/Loading";
 
 function Main({ weatherData, clothingItems, handleCardClick }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const filteredItems = clothingItems.filter(
+
+  let filteredItems = null;
+  filteredItems = clothingItems.filter(
     (item) => item.weather === weatherData.type
   );
+
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
@@ -23,8 +26,10 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
           </p>
         )}
 
-        {filteredItems.length === 0 ? (
+        {!filteredItems ? (
           <Loading name="loading-items-main" />
+        ) : filteredItems.length === 0 ? (
+          <p className="cards__text">Items not found!</p>
         ) : (
           <ul className="cards__list">
             {filteredItems.map((item) => {
