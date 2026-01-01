@@ -1,7 +1,20 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm";
 
-function AddItemModal({ isOpenModal, handleSubmit, onCloseModal }) {
+function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
+  const defaulValues = {
+    name: "",
+    link: "",
+    weather: "",
+  };
+  const { values, handleChange } = useForm(defaulValues);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onAddItem(values);
+  };
+
   return (
     <ModalWithForm
       title="New garment"
@@ -14,19 +27,31 @@ function AddItemModal({ isOpenModal, handleSubmit, onCloseModal }) {
         Name{" "}
         <input
           type="text"
+          name="name"
           className="modal__input"
           id="name"
           placeholder="Name"
+          required
+          minLength="1"
+          maxLength="30"
+          value={values.name}
+          onChange={handleChange}
         />
+        <span className="modal__eror" id="place-name-error"></span>
       </label>
       <label htmlFor="imageUrl" className="modal__label">
         Image{" "}
         <input
           type="url"
+          name="link"
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
+          required
+          value={values.link}
+          onChange={handleChange}
         />
+        <span className="modal__eror" id="place-link-error"></span>
       </label>
       <fieldset className="modal__radio-btns">
         <legend className="modal__legend">Select the weather type:</legend>
@@ -36,7 +61,9 @@ function AddItemModal({ isOpenModal, handleSubmit, onCloseModal }) {
             className="modal__radio-input"
             id="hot"
             name="weather"
+            required
             value="hot"
+            onChange={handleChange}
           />{" "}
           Hot
         </label>
@@ -47,6 +74,7 @@ function AddItemModal({ isOpenModal, handleSubmit, onCloseModal }) {
             id="warm"
             name="weather"
             value="warm"
+            onChange={handleChange}
           />{" "}
           Warm
         </label>
@@ -57,9 +85,11 @@ function AddItemModal({ isOpenModal, handleSubmit, onCloseModal }) {
             id="cold"
             name="weather"
             value="cold"
+            onChange={handleChange}
           />{" "}
           Cold
         </label>
+        <span className="modal__eror" id="place-weather-type-error"></span>
       </fieldset>
     </ModalWithForm>
   );

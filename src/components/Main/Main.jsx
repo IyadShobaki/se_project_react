@@ -13,6 +13,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
     (item) => item.weather === weatherData.type
   );
 
+  console.log(clothingItems);
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />

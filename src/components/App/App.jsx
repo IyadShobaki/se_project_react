@@ -41,6 +41,12 @@ function App() {
     setActiveModal("");
   };
 
+  const onAddItem = (inputValues) => {
+    inputValues._id = clothingItems.length + 1;
+    setClothingItems([...clothingItems, inputValues]);
+    closeActiveModal();
+  };
+
   useEffect(() => {
     getWeather(coordinates, apiKey)
       .then((data) => {
@@ -66,6 +72,7 @@ function App() {
         </div>
         <AddItemModal
           isOpenModal={activeModal === "add-garment"}
+          onAddItem={onAddItem}
           onCloseModal={closeActiveModal}
         />
         <ItemModal
