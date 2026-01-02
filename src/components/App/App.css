@@ -13,7 +13,7 @@
   padding: 0 40px;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 768px) {
   .page__content {
     padding: 0 16px;
   }

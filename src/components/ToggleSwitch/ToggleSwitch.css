@@ -1,5 +1,6 @@
 .toggle-switch {
-  margin: 0 10px 0 0;
+  box-sizing: border-box;
+  margin: 0;
   padding: 0;
   text-align: center;
   align-self: center;
@@ -25,8 +26,8 @@
   background-color: #000;
   position: absolute;
   left: 0;
-  width: 28px;
-  height: 28px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
   margin: 0;
   padding: 0;
@@ -42,11 +43,11 @@
   transition: left 0.3s ease-in-out;
 }
 .toggle-switch:hover .toggle-switch__checkbox:checked {
-  left: 25px;
+  left: 23px;
   transition: left 0.3s ease-in-out;
 }
 .toggle-switch__checkbox:checked {
-  left: 28px;
+  left: 25px;
   transition: left 0.3s ease-in-out;
 }
 
@@ -67,7 +68,7 @@
   transition: color 0.4s ease-in-out;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 768px) {
   .toggle-switch {
     order: 1;
   }

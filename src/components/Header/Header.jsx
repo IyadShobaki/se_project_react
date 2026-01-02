@@ -2,12 +2,15 @@ import { useState } from "react";
 
 import "./Header.css";
 import logo from "../../assets/images/logo.svg";
-import avatar from "../../assets/images/avatar.png";
+import avatarDefault from "../../assets/images/avatarDefault.png";
 
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ handleAddClick, weatherData }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const username = "Terrence Tegegne";
+  const avatar = avatarDefault;
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -41,8 +44,18 @@ function Header({ handleAddClick, weatherData }) {
           + Add clothes
         </button>
         <div className="header__user-container">
-          <p className="header__username">Terrence Tegegne</p>
-          <img src={avatar} alt="Terrence Tegegne" className="header__avatar" />
+          <p className="header__username">{username}</p>
+          {avatar ? (
+            <img
+              src={avatar || avatarDefault}
+              alt="user avatar"
+              className="header__avatar"
+            />
+          ) : (
+            <span className="header__avatar header__avatar_none">
+              {username?.toUpperCase().charAt(0) || ""}
+            </span>
+          )}
         </div>
       </div>
     </div>

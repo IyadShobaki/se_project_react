@@ -30,7 +30,7 @@
   margin: 0;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 768px) {
   .modal__container_type_image {
     max-width: 343px;
   }

@@ -13,15 +13,14 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
     (item) => item.weather === weatherData.type
   );
 
-  console.log(clothingItems);
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
-      <section className="cards">
+      <section className="main__cards">
         {weatherData.temp[currentTemperatureUnit] === 999 ? (
           <Loading name="loading-weather-main" />
         ) : (
-          <p className="cards__text">
+          <p className="main__text">
             Today is {weatherData.temp[currentTemperatureUnit]}
             &deg;{currentTemperatureUnit} / You may want to wear:
           </p>
@@ -30,9 +29,9 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
         {!filteredItems ? (
           <Loading name="loading-items-main" />
         ) : filteredItems.length === 0 ? (
-          <p className="cards__text">Items not found!</p>
+          <p className="main__text">Items not found!</p>
         ) : (
-          <ul className="cards__list">
+          <ul className="main__list">
             {filteredItems.map((item) => {
               return (
                 <ItemCard

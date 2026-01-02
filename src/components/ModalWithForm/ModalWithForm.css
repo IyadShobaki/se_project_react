@@ -147,7 +147,7 @@
   color: #ffffff;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 768px) {
   .modal {
     align-items: flex-end;
     z-index: 3;

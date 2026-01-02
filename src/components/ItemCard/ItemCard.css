@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 768px) {
   .card {
     width: 164px;
     height: 164px;
