@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import "./Header.css";
 import logo from "../../assets/images/logo.svg";
@@ -22,7 +23,9 @@ function Header({ handleAddClick, weatherData }) {
   });
   return (
     <div className="header">
-      <img src={logo} alt="WTWR Logo" className="header__logo" />
+      <NavLink to="/">
+        <img src={logo} alt="WTWR Logo" className="header__logo" />
+      </NavLink>
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
@@ -43,20 +46,22 @@ function Header({ handleAddClick, weatherData }) {
         >
           + Add clothes
         </button>
-        <div className="header__user-container">
-          <p className="header__username">{username}</p>
-          {avatar ? (
-            <img
-              src={avatar || avatarDefault}
-              alt="user avatar"
-              className="header__avatar"
-            />
-          ) : (
-            <span className="header__avatar header__avatar_none">
-              {username?.toUpperCase().charAt(0) || ""}
-            </span>
-          )}
-        </div>
+        <NavLink className="header__nav-link" to="/profile">
+          <div className="header__user-container">
+            <p className="header__username">{username}</p>
+            {avatar ? (
+              <img
+                src={avatar || avatarDefault}
+                alt="user avatar"
+                className="header__avatar"
+              />
+            ) : (
+              <span className="header__avatar header__avatar_none">
+                {username?.toUpperCase().charAt(0) || ""}
+              </span>
+            )}
+          </div>
+        </NavLink>
       </div>
     </div>
   );
