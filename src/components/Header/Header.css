@@ -96,6 +96,7 @@
   }
   .header__date-and-location {
     padding: 0;
+    margin: 0;
   }
   .header__toggler-btn {
     display: block;

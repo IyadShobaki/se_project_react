@@ -12,7 +12,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
   filteredItems = clothingItems.filter(
     (item) => item.weather === weatherData.type
   );
-  console.log(filteredItems);
+
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
