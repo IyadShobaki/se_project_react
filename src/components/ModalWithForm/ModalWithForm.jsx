@@ -7,8 +7,16 @@ function ModalWithForm({
   onSubmit,
   onClose,
 }) {
+  const onOverlayClick = (evt) => {
+    if (evt.target.className.includes("modal_opened")) {
+      onClose();
+    }
+  };
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+    <div
+      onClick={onOverlayClick}
+      className={`modal ${isOpen ? "modal_opened" : ""}`}
+    >
       <div className="modal__container">
         <h2 className="modal__title">{title}</h2>
         <button

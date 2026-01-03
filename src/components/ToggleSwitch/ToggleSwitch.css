@@ -68,7 +68,7 @@
   transition: color 0.4s ease-in-out;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 830px) {
   .toggle-switch {
     order: 1;
   }

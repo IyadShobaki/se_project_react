@@ -8,11 +8,12 @@ import Footer from "../Footer/Footer";
 
 import ItemModal from "../ItemModal/ItemModal";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
-import { getItems } from "../../utils/itemsApi";
+import { getItems, addItem, deleteItem } from "../../utils/itemsApi";
 import { apiKey, coordinates, itemsBaseUrl } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
@@ -43,10 +44,36 @@ function App() {
     setActiveModal("");
   };
 
-  const onAddItem = (inputValues) => {
-    inputValues._id = clothingItems.length + 1;
-    setClothingItems([...clothingItems, inputValues]);
+  const [selectedItem, setSelectedItem] = useState(-1);
+  const onDeleteItem = (itemId) => {
+    setSelectedItem(itemId);
+    setActiveModal("confirm-deleting");
+  };
+  const onConfirmedDeleteItem = () => {
+    if (selectedItem === -1) return;
+    deleteItem(itemsBaseUrl, selectedItem)
+      .then(() => {
+        const newClothingItems = clothingItems.filter((item) => {
+          return item._id != selectedItem;
+        });
+        setClothingItems(newClothingItems);
+        closeActiveModal();
+      })
+      .catch(console.error)
+      .finally(setSelectedItem(-1));
+  };
+
+  const onCancelDeletingItem = () => {
+    setSelectedItem(-1);
     closeActiveModal();
+  };
+  const onAddItem = (inputValues) => {
+    addItem(itemsBaseUrl, inputValues)
+      .then((data) => {
+        setClothingItems([data, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {
@@ -59,7 +86,7 @@ function App() {
 
     getItems(itemsBaseUrl)
       .then((data) => {
-        setClothingItems(data);
+        setClothingItems(data.reverse());
       })
       .catch(console.error);
   }, []);
@@ -104,6 +131,13 @@ function App() {
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onClose={closeActiveModal}
+          onDeleteItem={onDeleteItem}
+        />
+        <ConfirmationModal
+          isOpen={activeModal === "confirm-deleting"}
+          onClose={closeActiveModal}
+          onDeleteItem={onConfirmedDeleteItem}
+          onCancelDeletingItem={onCancelDeletingItem}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

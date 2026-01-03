@@ -61,6 +61,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
             className="modal__radio-input"
             id="hot"
             name="weather"
+            checked={values.weather === "hot"}
             required
             value="hot"
             onChange={handleChange}
@@ -73,6 +74,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
             className="modal__radio-input"
             id="warm"
             name="weather"
+            checked={values.weather === "warm"}
             value="warm"
             onChange={handleChange}
           />{" "}
@@ -84,6 +86,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
             className="modal__radio-input"
             id="cold"
             name="weather"
+            checked={values.weather === "cold"}
             value="cold"
             onChange={handleChange}
           />{" "}

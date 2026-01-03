@@ -1,0 +1,37 @@
+.modal__container_type_confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  max-width: 670px;
+  padding: 20px;
+}
+
+.modal__title_type_confirm {
+  font-size: 20px;
+  line-height: 24px;
+  max-width: 367px;
+  text-align: center;
+}
+
+.modal__delete-btn_type_confirm {
+  align-self: unset;
+  margin-top: 16px;
+}
+
+.modal__cancel-btn {
+  border: none;
+  display: block;
+  margin: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+}

@@ -22,6 +22,8 @@
   font-size: 20px;
   line-height: 24px;
   padding: 20px 32px 32px;
+  display: flex;
+  justify-content: space-between;
 }
 .modal__caption {
   margin: 0 0 12px;
@@ -29,9 +31,24 @@
 .modal__weather {
   margin: 0;
 }
+.modal__delete-btn {
+  margin: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: rgba(255, 77, 0, 1);
+  align-self: flex-start;
+}
 
 @media (max-width: 768px) {
   .modal__container_type_image {
     max-width: 343px;
+  }
+  .modal__footer {
+    padding: 20px 10px 10px;
   }
 }

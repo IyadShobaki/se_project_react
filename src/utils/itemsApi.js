@@ -5,16 +5,16 @@ export const getItems = (itemsBaseUrl) => {
   });
 };
 
-export const addItem = (itemsBaseUrl) => {
+export const addItem = (itemsBaseUrl, inputValues) => {
   return request(`${itemsBaseUrl}/items`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, imageUrl, weather }),
+    body: JSON.stringify(inputValues),
   });
 };
 
-export const deleteItem = (itemsBaseUrl, id) => {
-  return request(`${itemsBaseUrl}/items/${id}`, {
+export const deleteItem = (itemsBaseUrl, itemId) => {
+  return request(`${itemsBaseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });

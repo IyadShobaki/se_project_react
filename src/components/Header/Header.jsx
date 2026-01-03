@@ -21,6 +21,7 @@ function Header({ handleAddClick, weatherData }) {
     month: "long",
     day: "numeric",
   });
+
   return (
     <div className="header">
       <NavLink to="/">
