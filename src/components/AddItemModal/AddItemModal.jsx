@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
   const defaulValues = {
     name: "",
-    link: "",
+    imageUrl: "",
     weather: "",
   };
   const { values, handleChange } = useForm(defaulValues);
@@ -43,12 +43,12 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
         Image{" "}
         <input
           type="url"
-          name="link"
+          name="imageUrl"
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
           required
-          value={values.link}
+          value={values.imageUrl}
           onChange={handleChange}
         />
         <span className="modal__eror" id="place-link-error"></span>

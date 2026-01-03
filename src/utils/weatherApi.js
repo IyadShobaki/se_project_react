@@ -1,5 +1,5 @@
-export const getWeather = ({ latitude, longitude }, APIkey) => {
-  return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}
+export const getWeather = ({ latitude, longitude }, apiKey) => {
+  return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}
 `).then(checkResponse);
 };
 

@@ -9,7 +9,7 @@ function ItemModal({ isOpen, card, onClose }) {
           className="modal__close-btn modal__close-btn_type_preview"
         ></button>
         <img
-          src={card.link}
+          src={card.imageUrl}
           alt={`${card.name} image`}
           className="modal__image"
         />
