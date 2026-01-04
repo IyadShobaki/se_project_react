@@ -6,13 +6,14 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
   const defaulValues = {
     name: "",
     imageUrl: "",
-    weather: "",
+    weather: "hot",
   };
-  const { values, handleChange } = useForm(defaulValues);
+  const { values, errors, setValues, handleChange } = useForm(defaulValues);
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = () => {
+    //evt.preventDefault();
     onAddItem(values);
+    setValues(defaulValues);
   };
 
   return (
@@ -22,13 +23,24 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
       isOpen={isOpenModal}
       onSubmit={handleSubmit}
       onClose={onCloseModal}
+      inputErrors={errors}
+      inputValues={values}
     >
-      <label htmlFor="name" className="modal__label">
-        Name{" "}
+      <label
+        htmlFor="name"
+        className={`modal__label ${
+          errors.name.length > 0 ? "modal__label_type_error" : ""
+        }`}
+      >
+        {errors.name.length > 0
+          ? `Name* (${errors.name.replace(".", "")})`
+          : "Name*"}
         <input
           type="text"
           name="name"
-          className="modal__input"
+          className={`modal__input ${
+            errors.name.length > 0 ? "modal__input_type_error" : ""
+          }`}
           id="name"
           placeholder="Name"
           required
@@ -37,24 +49,31 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
           value={values.name}
           onChange={handleChange}
         />
-        <span className="modal__eror" id="place-name-error"></span>
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
-        Image{" "}
+      <label
+        htmlFor="imageUrl"
+        className={`modal__label ${
+          errors.imageUrl.length > 0 ? "modal__label_type_error" : ""
+        }`}
+      >
+        {errors.imageUrl.length > 0
+          ? `Image* (${errors.imageUrl.replace(".", "")})`
+          : "Image*"}
         <input
           type="url"
           name="imageUrl"
-          className="modal__input"
+          className={`modal__input ${
+            errors.imageUrl.length > 0 ? "modal__input_type_error" : ""
+          }`}
           id="imageUrl"
           placeholder="Image URL"
           required
           value={values.imageUrl}
           onChange={handleChange}
         />
-        <span className="modal__eror" id="place-link-error"></span>
       </label>
       <fieldset className="modal__radio-btns">
-        <legend className="modal__legend">Select the weather type:</legend>
+        <legend className="modal__legend">Select the weather type*:</legend>
         <label htmlFor="hot" className="modal__label modal__label_type_radio">
           <input
             type="radio"
@@ -92,7 +111,6 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
           />{" "}
           Cold
         </label>
-        <span className="modal__eror" id="place-weather-type-error"></span>
       </fieldset>
     </ModalWithForm>
   );
