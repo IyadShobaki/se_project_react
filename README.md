@@ -18,3 +18,9 @@ WTWR is a responsive, weather-based clothing recommendation web application buil
 
 Visit the live application deployed with GitHub Pages:
 👉 https://iyadshobaki.github.io/se_project_react
+
+## Project Pitch Video
+
+Check out these videos, where I describe my project and some challenges I faced while building it:
+
+- [WTWR - Stage 1](https://drive.google.com/file/d/1gLmV6DGIRPG52Ttqyxdwgau0VdSJkbXO/view?usp=drive_link)

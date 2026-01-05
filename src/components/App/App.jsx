@@ -26,6 +26,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [selectedItemId, setSelectedItemId] = useState(-1);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleToggleSwitchChange = () => {
@@ -44,27 +45,26 @@ function App() {
     setActiveModal("");
   };
 
-  const [selectedItem, setSelectedItem] = useState(-1);
   const onDeleteItem = (itemId) => {
-    setSelectedItem(itemId);
+    setSelectedItemId(itemId);
     setActiveModal("confirm-deleting");
   };
   const onConfirmedDeleteItem = () => {
-    if (selectedItem === -1) return;
-    deleteItem(itemsBaseUrl, selectedItem)
+    if (selectedItemId === -1) return;
+    deleteItem(itemsBaseUrl, selectedItemId)
       .then(() => {
         const newClothingItems = clothingItems.filter((item) => {
-          return item._id != selectedItem;
+          return item._id != selectedItemId;
         });
         setClothingItems(newClothingItems);
         closeActiveModal();
       })
       .catch(console.error)
-      .finally(setSelectedItem(-1));
+      .finally(setSelectedItemId(-1));
   };
 
   const onCancelDeletingItem = () => {
-    setSelectedItem(-1);
+    setSelectedItemId(-1);
     closeActiveModal();
   };
   const onAddItem = (inputValues) => {
