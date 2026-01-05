@@ -67,13 +67,20 @@ function App() {
     setSelectedItemId(-1);
     closeActiveModal();
   };
-  const handleAddItem = (inputValues) => {
-    addItem(itemsBaseUrl, inputValues)
-      .then((data) => {
-        setClothingItems([data, ...clothingItems]);
-        closeActiveModal();
-      })
-      .catch(console.error);
+  const handleAddItem = async (inputValues) => {
+    try {
+      const data = await addItem(itemsBaseUrl, inputValues);
+      setClothingItems([data, ...clothingItems]);
+      closeActiveModal();
+    } catch (error) {
+      throw new Error(error);
+    }
+    // addItem(itemsBaseUrl, inputValues)
+    //   .then((data) => {
+    //     setClothingItems([data, ...clothingItems]);
+    //     closeActiveModal();
+    //   })
+    //   .catch(console.error);
   };
 
   useEffect(() => {

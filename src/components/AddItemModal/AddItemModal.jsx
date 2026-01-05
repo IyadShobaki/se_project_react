@@ -4,11 +4,11 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
 function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
-  useEffect(() => {
-    if (isOpenModal) {
-      setValues(defaulValues);
-    }
-  }, [isOpenModal]);
+  // useEffect(() => {
+  //   if (isOpenModal) {
+  //     setValues(defaulValues);
+  //   }
+  // }, [isOpenModal]);
 
   const defaulValues = {
     name: "",
@@ -17,9 +17,14 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
   };
   const { values, errors, setValues, handleChange } = useForm(defaulValues);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     //evt.preventDefault();
-    onAddItem(values);
+    try {
+      await onAddItem(values);
+      setValues(defaulValues);
+    } catch (error) {
+      alert("Something went wrong. Pleae try again later.");
+    }
   };
 
   return (

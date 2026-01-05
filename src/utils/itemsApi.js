@@ -5,12 +5,25 @@ export const getItems = (itemsBaseUrl) => {
   });
 };
 
-export const addItem = (itemsBaseUrl, inputValues) => {
-  return request(`${itemsBaseUrl}/items`, {
+export const addItem = async (itemsBaseUrl, inputValues) => {
+  const response = await fetch(`${itemsBaseUrl}/items`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(inputValues),
   });
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  return data;
+
+  // return request(`${itemsBaseUrl}/items`, {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify(inputValues),
+  // });
 };
 
 export const deleteItem = (itemsBaseUrl, itemId) => {
