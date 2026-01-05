@@ -2,14 +2,18 @@ import "./ClothesSection.css";
 
 import ItemCard from "../ItemCard/ItemCard";
 import Loading from "../Loading/Loading";
-function ClothesSection({ clothingItems, handleCardClick }) {
+function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
   let filteredItems = null;
   filteredItems = clothingItems.filter((item) => item.weather === item.weather);
   return (
     <div className="clothes-section">
       <div className="clothes-section__row">
         <p className="clothes-section__text">Your items</p>
-        <button type="button" className="clothes-section__add-new-btn">
+        <button
+          onClick={handleAddClick}
+          type="button"
+          className="clothes-section__add-new-btn"
+        >
           + Add new
         </button>
       </div>

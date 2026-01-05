@@ -45,11 +45,11 @@ function App() {
     setActiveModal("");
   };
 
-  const onDeleteItem = (itemId) => {
+  const handleDeleteItem = (itemId) => {
     setSelectedItemId(itemId);
     setActiveModal("confirm-deleting");
   };
-  const onConfirmedDeleteItem = () => {
+  const handleConfirmDeleteItem = () => {
     if (selectedItemId === -1) return;
     deleteItem(itemsBaseUrl, selectedItemId)
       .then(() => {
@@ -60,14 +60,14 @@ function App() {
         closeActiveModal();
       })
       .catch(console.error)
-      .finally(setSelectedItemId(-1));
+      .finally(() => setSelectedItemId(-1));
   };
 
-  const onCancelDeletingItem = () => {
+  const handleCancelDeleteItem = () => {
     setSelectedItemId(-1);
     closeActiveModal();
   };
-  const onAddItem = (inputValues) => {
+  const handleAddItem = (inputValues) => {
     addItem(itemsBaseUrl, inputValues)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
@@ -115,6 +115,7 @@ function App() {
                 <Profile
                   clothingItems={clothingItems}
                   handleCardClick={handleCardClick}
+                  handleAddClick={handleAddClick}
                 />
               }
             />
@@ -124,20 +125,20 @@ function App() {
         </div>
         <AddItemModal
           isOpenModal={activeModal === "add-garment"}
-          onAddItem={onAddItem}
+          onAddItem={handleAddItem}
           onCloseModal={closeActiveModal}
         />
         <ItemModal
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onClose={closeActiveModal}
-          onDeleteItem={onDeleteItem}
+          onDeleteItem={handleDeleteItem}
         />
         <ConfirmationModal
           isOpen={activeModal === "confirm-deleting"}
           onClose={closeActiveModal}
-          onDeleteItem={onConfirmedDeleteItem}
-          onCancelDeletingItem={onCancelDeletingItem}
+          onDeleteItem={handleConfirmDeleteItem}
+          onCancelDeletingItem={handleCancelDeleteItem}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

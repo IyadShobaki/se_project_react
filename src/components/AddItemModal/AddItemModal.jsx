@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
 function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
+  useEffect(() => {
+    if (isOpenModal) {
+      setValues(defaulValues);
+    }
+  }, [isOpenModal]);
+
   const defaulValues = {
     name: "",
     imageUrl: "",
@@ -13,7 +20,6 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
   const handleSubmit = () => {
     //evt.preventDefault();
     onAddItem(values);
-    setValues(defaulValues);
   };
 
   return (
