@@ -18,12 +18,6 @@ export const addItem = async (itemsBaseUrl, inputValues) => {
   const data = await response.json();
 
   return data;
-
-  // return request(`${itemsBaseUrl}/items`, {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(inputValues),
-  // });
 };
 
 export const deleteItem = (itemsBaseUrl, itemId) => {
