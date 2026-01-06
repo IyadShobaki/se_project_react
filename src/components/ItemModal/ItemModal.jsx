@@ -3,16 +3,8 @@ function ItemModal({ isOpen, card, onClose, onDeleteItem }) {
   const handleDelete = () => {
     onDeleteItem(card._id);
   };
-  const onOverlayClick = (evt) => {
-    if (evt.target.className.includes("modal_opened")) {
-      onClose();
-    }
-  };
   return (
-    <div
-      onClick={onOverlayClick}
-      className={`modal ${isOpen ? "modal_opened" : ""}`}
-    >
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__container modal__container_type_image">
         <button
           onClick={onClose}

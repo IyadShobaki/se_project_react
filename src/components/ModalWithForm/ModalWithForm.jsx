@@ -32,23 +32,9 @@ function ModalWithForm({
       onSubmit();
     }
   };
-  const onOverlayClick = (evt) => {
-    if (evt.target.className.includes("modal_opened")) {
-      onClose();
-    }
-    if (evt.target.className.includes("modal__submit-btn_disabled")) {
-      evt.target.classList.add("shake");
-      setTimeout(() => {
-        evt.target.classList.remove("shake");
-      }, 1000);
-    }
-  };
 
   return (
-    <div
-      onClick={onOverlayClick}
-      className={`modal ${isOpen ? "modal_opened" : ""}`}
-    >
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__container">
         <h2 className="modal__title">{title}</h2>
         <button

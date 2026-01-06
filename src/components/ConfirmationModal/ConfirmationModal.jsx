@@ -13,17 +13,8 @@ function ConfirmationModal({
     onCancelDeletingItem();
   };
 
-  const onOverlayClick = (evt) => {
-    if (evt.target.className.includes("modal_opened")) {
-      onClose();
-    }
-  };
-
   return (
-    <div
-      onClick={onOverlayClick}
-      className={`modal ${isOpen ? "modal_opened" : ""}`}
-    >
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__container modal__container_type_confirm">
         <button
           onClick={onClose}
