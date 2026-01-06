@@ -8,7 +8,8 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
     imageUrl: "",
     weather: "hot",
   };
-  const { values, errors, setValues, handleChange } = useForm(defaulValues);
+  const { values, errors, isValid, setValues, handleChange } =
+    useForm(defaulValues);
 
   const handleSubmit = async () => {
     try {
@@ -29,6 +30,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
       inputErrors={errors}
       inputValues={values}
       isLoading={isLoading}
+      isValid={isValid}
     >
       <label
         htmlFor="name"

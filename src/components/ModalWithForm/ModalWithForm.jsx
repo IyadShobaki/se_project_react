@@ -6,27 +6,21 @@ function ModalWithForm({
   isOpen,
   onSubmit,
   onClose,
-  inputErrors,
-  inputValues,
   isLoading,
+  isValid,
 }) {
+  console.log(isValid);
   const getLoadingBtnText = (text) => {
     const firstWord = text.split(" ")[0];
     const result =
       firstWord[firstWord.length - 1] === "e"
         ? firstWord.slice(0, -1) + "ing..."
         : firstWord + "ing...";
-    debugger;
     return result;
   };
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (
-      inputErrors.name?.length > 0 ||
-      inputErrors.imageUrl?.length > 0 ||
-      inputValues.name?.length === 0 ||
-      inputValues.imageUrl?.length === 0
-    ) {
+    if (!isValid) {
       return;
     } else {
       onSubmit();
@@ -47,12 +41,7 @@ function ModalWithForm({
           <button
             type="submit"
             className={`modal__submit-btn ${
-              inputErrors.name?.length > 0 ||
-              inputErrors.imageUrl?.length > 0 ||
-              inputValues.name?.length === 0 ||
-              inputValues.imageUrl?.length === 0
-                ? "modal__submit-btn_disabled"
-                : ""
+              !isValid ? "modal__submit-btn_disabled" : ""
             }`}
           >
             {isLoading ? getLoadingBtnText(buttonText) : buttonText}
