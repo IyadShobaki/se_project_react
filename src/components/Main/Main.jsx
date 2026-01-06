@@ -26,7 +26,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
           </p>
         )}
 
-        {!filteredItems ? (
+        {weatherData.temp[currentTemperatureUnit] === 999 ? (
           <Loading name="loading-items-main" />
         ) : filteredItems.length === 0 ? (
           <p className="main__text">Items not found!</p>

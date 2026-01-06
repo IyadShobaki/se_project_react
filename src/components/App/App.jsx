@@ -9,7 +9,11 @@ import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
 import { getItems, addItem, deleteItem } from "../../utils/itemsApi";
-import { apiKey, coordinates, itemsBaseUrl } from "../../utils/constants";
+import {
+  apiKey,
+  defaultCoordinates,
+  itemsBaseUrl,
+} from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
@@ -81,12 +85,39 @@ function App() {
   };
 
   useEffect(() => {
-    getWeather(coordinates, apiKey)
-      .then((data) => {
+    const fetchWeather = async (coords) => {
+      try {
+        const data = await getWeather(coords, apiKey);
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
-      })
-      .catch(console.error);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    const resolveGeolocation = () =>
+      new Promise((resolve) => {
+        if (!navigator.geolocation) {
+          resolve(defaultCoordinates);
+          return;
+        }
+        navigator.geolocation.getCurrentPosition(
+          (pos) =>
+            resolve({
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude,
+            }),
+          (err) => {
+            console.warn("Geolocation failed, using default coords", err);
+            resolve(defaultCoordinates);
+          },
+          { enableHighAccuracy: true, timeout: 30000, maximumAge: 600000 }
+        );
+      });
+
+    resolveGeolocation().then((coords) => {
+      fetchWeather(coords);
+    });
 
     getItems(itemsBaseUrl)
       .then((data) => {
@@ -139,6 +170,7 @@ function App() {
                   weatherData={weatherData}
                   clothingItems={clothingItems}
                   handleCardClick={handleCardClick}
+                  isLoading={isLoading}
                 />
               }
             />
