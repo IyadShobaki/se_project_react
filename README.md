@@ -4,11 +4,28 @@ WTWR is a responsive, weather-based clothing recommendation web application buil
 
 ## Features
 
-- Fetches current weather data from a weather API
-- Displays temperature and weather conditions
-- Filters clothing suggestions based on weather
-- Interactive UI with clothing cards and modals
-- Fully responsive layout for desktop & mobile
+- Real-time weather data integration
+- Dynamic clothing recommendations based on temperature
+- Interactive UI with modals for viewing and managing clothing items
+- Temperature unit toggle (Fahrenheit / Celsius) using React Context
+- Profile page with full wardrobe view using React Router
+- Add and delete clothing items with form handling and confirmation modals
+- Fully responsive design following modern UI principles
+
+## Technology Stack
+
+- Frontend: React.js with Vite
+- Styling: CSS with BEM methodology and responsive media queries
+- API Integration: OpenWeather API
+- Mock Backend: json-server for CRUD operations
+- Deployment: GitHub Pages
+
+## Future Enhancements
+
+- User authentication and personalized wardrobes
+- Persistent backend with database integration
+- Smart outfit recommendations based on user preferences and history
+- Enhanced accessibility and theme customization
 
 ## Links
 
@@ -23,4 +40,4 @@ Visit the live application deployed with GitHub Pages:
 
 Check out these videos, where I describe my project and some challenges I faced while building it:
 
-- [WTWR - Stage 1](https://drive.google.com/file/d/1gLmV6DGIRPG52Ttqyxdwgau0VdSJkbXO/view?usp=drive_link)
+- [WTWR - Stage 1](https://drive.google.com/file/d/1TrAKqJ1UKmjSwRedUUrPjz7s14-r_1b2/view?usp=drive_link)

@@ -9,7 +9,6 @@ function ModalWithForm({
   isLoading,
   isValid,
 }) {
-  console.log(isValid);
   const getLoadingBtnText = (text) => {
     const firstWord = text.split(" ")[0];
     const result =
