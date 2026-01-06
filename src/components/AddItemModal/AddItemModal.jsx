@@ -1,6 +1,6 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useForm } from "../../hooks/useForm";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
   const defaulValues = {
@@ -8,13 +8,15 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
     imageUrl: "",
     weather: "hot",
   };
-  const { values, errors, isValid, setValues, handleChange } =
-    useForm(defaulValues);
+  const { values, errors, isValid, handleChange, resetForm } =
+    useFormWithValidation(defaulValues);
 
   const handleSubmit = async () => {
+    if (!isValid) return;
+
     try {
       await onAddItem(values);
-      setValues(defaulValues);
+      resetForm();
     } catch (error) {
       alert("Something went wrong. Pleae try again later.");
     }
