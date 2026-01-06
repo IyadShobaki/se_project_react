@@ -28,6 +28,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [selectedItemId, setSelectedItemId] = useState(-1);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -69,9 +70,11 @@ function App() {
   };
   const handleAddItem = async (inputValues) => {
     try {
+      setIsLoading(true);
       const data = await addItem(itemsBaseUrl, inputValues);
       setClothingItems([data, ...clothingItems]);
       closeActiveModal();
+      setIsLoading(false);
     } catch (error) {
       throw new Error(error);
     }
@@ -148,6 +151,7 @@ function App() {
           isOpenModal={activeModal === "add-garment"}
           onAddItem={handleAddItem}
           onCloseModal={closeActiveModal}
+          isLoading={isLoading}
         />
         <ItemModal
           isOpen={activeModal === "preview"}

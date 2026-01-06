@@ -2,7 +2,7 @@ import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
-function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
+function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
   const defaulValues = {
     name: "",
     imageUrl: "",
@@ -28,6 +28,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal }) {
       onClose={onCloseModal}
       inputErrors={errors}
       inputValues={values}
+      isLoading={isLoading}
     >
       <label
         htmlFor="name"

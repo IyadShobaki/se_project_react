@@ -8,7 +8,17 @@ function ModalWithForm({
   onClose,
   inputErrors,
   inputValues,
+  isLoading,
 }) {
+  const getLoadingBtnText = (text) => {
+    const firstWord = text.split(" ")[0];
+    const result =
+      firstWord[firstWord.length - 1] === "e"
+        ? firstWord.slice(0, -1) + "ing..."
+        : firstWord + "ing...";
+    debugger;
+    return result;
+  };
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (
@@ -59,7 +69,7 @@ function ModalWithForm({
                 : ""
             }`}
           >
-            {buttonText}
+            {isLoading ? getLoadingBtnText(buttonText) : buttonText}
           </button>
         </form>
       </div>
