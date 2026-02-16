@@ -111,7 +111,7 @@ function App() {
             console.warn("Geolocation failed, using default coords", err);
             resolve(defaultCoordinates);
           },
-          { enableHighAccuracy: true, timeout: 30000, maximumAge: 600000 }
+          { enableHighAccuracy: true, timeout: 30000, maximumAge: 600000 },
         );
       });
 
@@ -120,7 +120,7 @@ function App() {
     });
 
     getItems(itemsBaseUrl)
-      .then((data) => {
+      .then(({ data }) => {
         setClothingItems(data.reverse());
       })
       .catch(console.error);
