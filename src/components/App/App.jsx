@@ -16,6 +16,8 @@ import {
 } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import Profile from "../Profile/Profile";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
@@ -37,6 +39,7 @@ function App() {
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
+
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -44,6 +47,50 @@ function App() {
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
+  };
+
+  const handleLoginClick = () => {
+    setActiveModal("login");
+  };
+
+  const handleRegisterClick = () => {
+    setActiveModal("register");
+  };
+
+  const handleLoginNavigateRegister = () => {
+    setActiveModal("register");
+  };
+
+  const handleRegisterNavigateLogin = () => {
+    setActiveModal("login");
+  };
+
+  const handleLogin = async (credentials) => {
+    try {
+      setIsLoading(true);
+      // API call would go here
+      console.log("Login attempt with:", credentials);
+      // Example: await loginUser(credentials)
+      setActiveModal("");
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      throw new Error(error);
+    }
+  };
+
+  const handleRegister = async (credentials) => {
+    try {
+      setIsLoading(true);
+      // API call would go here
+      console.log("Register attempt with:", credentials);
+      // Example: await registerUser(credentials)
+      setActiveModal("");
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      throw new Error(error);
+    }
   };
 
   const closeActiveModal = () => {
@@ -161,7 +208,12 @@ function App() {
     >
       <div className="page">
         <div className="page__content">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+          <Header
+            handleAddClick={handleAddClick}
+            handleLoginClick={handleLoginClick}
+            handleRegisterClick={handleRegisterClick}
+            weatherData={weatherData}
+          />
           <Routes>
             <Route
               path="/"
@@ -204,6 +256,20 @@ function App() {
           onClose={closeActiveModal}
           onDeleteItem={handleConfirmDeleteItem}
           onCancelDeletingItem={handleCancelDeleteItem}
+        />
+        <LoginModal
+          isOpen={activeModal === "login"}
+          onLogin={handleLogin}
+          onClose={closeActiveModal}
+          onNavigateRegister={handleLoginNavigateRegister}
+          isLoading={isLoading}
+        />
+        <RegisterModal
+          isOpen={activeModal === "register"}
+          onRegister={handleRegister}
+          onClose={closeActiveModal}
+          onNavigateLogin={handleRegisterNavigateLogin}
+          isLoading={isLoading}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

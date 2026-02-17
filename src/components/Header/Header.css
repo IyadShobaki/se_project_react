@@ -46,6 +46,24 @@
   font-weight: 700;
 }
 
+.header__auth-btn {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.header__login-btn {
+  color: #000;
+}
+
+.header__register-btn {
+  color: #000;
+}
+
 .header__nav-link {
   text-decoration: none;
   color: black;
@@ -119,6 +137,9 @@
     border-radius: 10px;
   }
   .header__add-clothes-btn {
+    margin: 0;
+  }
+  .header__auth-btn {
     margin: 0;
   }
   .header__user-container {

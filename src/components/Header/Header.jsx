@@ -7,7 +7,12 @@ import avatarDefault from "../../assets/images/avatarDefault.png";
 
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({
+  handleAddClick,
+  handleLoginClick,
+  handleRegisterClick,
+  weatherData,
+}) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const username = "Terrence Tegegne";
@@ -46,6 +51,20 @@ function Header({ handleAddClick, weatherData }) {
           className="header__add-clothes-btn"
         >
           + Add clothes
+        </button>
+        <button
+          onClick={handleRegisterClick}
+          type="button"
+          className="header__auth-btn header__register-btn"
+        >
+          Sign up
+        </button>
+        <button
+          onClick={handleLoginClick}
+          type="button"
+          className="header__auth-btn header__login-btn"
+        >
+          Log in
         </button>
         <NavLink className="header__nav-link" to="/profile">
           <div className="header__user-container">
