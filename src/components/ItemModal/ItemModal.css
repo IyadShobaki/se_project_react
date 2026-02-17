@@ -44,6 +44,10 @@
   align-self: flex-start;
 }
 
+.modal__delete-button_hidden {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .modal__container_type_image {
     max-width: 343px;
