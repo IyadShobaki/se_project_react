@@ -35,6 +35,7 @@ function App() {
   const [selectedItemId, setSelectedItemId] = useState(-1);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -71,6 +72,7 @@ function App() {
       // API call would go here
       console.log("Login attempt with:", credentials);
       // Example: await loginUser(credentials)
+      setIsLoggedIn(true);
       setActiveModal("");
       setIsLoading(false);
     } catch (error) {
@@ -85,6 +87,7 @@ function App() {
       // API call would go here
       console.log("Register attempt with:", credentials);
       // Example: await registerUser(credentials)
+      setIsLoggedIn(true);
       setActiveModal("");
       setIsLoading(false);
     } catch (error) {
@@ -213,6 +216,7 @@ function App() {
             handleLoginClick={handleLoginClick}
             handleRegisterClick={handleRegisterClick}
             weatherData={weatherData}
+            isLoggedIn={isLoggedIn}
           />
           <Routes>
             <Route

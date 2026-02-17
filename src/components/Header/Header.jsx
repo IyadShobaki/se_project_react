@@ -12,6 +12,7 @@ function Header({
   handleLoginClick,
   handleRegisterClick,
   weatherData,
+  isLoggedIn,
 }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -45,43 +46,51 @@ function Header({
         }`}
       >
         <ToggleSwitch />
-        <button
-          onClick={handleAddClick}
-          type="button"
-          className="header__add-clothes-btn"
-        >
-          + Add clothes
-        </button>
-        <button
-          onClick={handleRegisterClick}
-          type="button"
-          className="header__auth-btn header__register-btn"
-        >
-          Sign up
-        </button>
-        <button
-          onClick={handleLoginClick}
-          type="button"
-          className="header__auth-btn header__login-btn"
-        >
-          Log in
-        </button>
-        <NavLink className="header__nav-link" to="/profile">
-          <div className="header__user-container">
-            <p className="header__username">{username}</p>
-            {avatar ? (
-              <img
-                src={avatar || avatarDefault}
-                alt="user avatar"
-                className="header__avatar"
-              />
-            ) : (
-              <span className="header__avatar header__avatar_none">
-                {username?.toUpperCase().charAt(0) || ""}
-              </span>
-            )}
-          </div>
-        </NavLink>
+        {isLoggedIn && (
+          <button
+            onClick={handleAddClick}
+            type="button"
+            className="header__add-clothes-btn"
+          >
+            + Add clothes
+          </button>
+        )}
+        {!isLoggedIn && (
+          <>
+            <button
+              onClick={handleRegisterClick}
+              type="button"
+              className="header__auth-btn header__register-btn"
+            >
+              Sign up
+            </button>
+            <button
+              onClick={handleLoginClick}
+              type="button"
+              className="header__auth-btn header__login-btn"
+            >
+              Log in
+            </button>
+          </>
+        )}
+        {isLoggedIn && (
+          <NavLink className="header__nav-link" to="/profile">
+            <div className="header__user-container">
+              <p className="header__username">{username}</p>
+              {avatar ? (
+                <img
+                  src={avatar || avatarDefault}
+                  alt="user avatar"
+                  className="header__avatar"
+                />
+              ) : (
+                <span className="header__avatar header__avatar_none">
+                  {username?.toUpperCase().charAt(0) || ""}
+                </span>
+              )}
+            </div>
+          </NavLink>
+        )}
       </div>
     </div>
   );
