@@ -75,6 +75,21 @@
   gap: 12px;
 }
 
+.header__logout-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #000;
+  padding: 8px 12px;
+}
+
+.header__logout-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .header__username {
   margin: 0;
   font-size: 20px;

@@ -18,6 +18,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import AddItemModal from "../AddItemModal/AddItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import { signup, signin, getCurrentUser } from "../../utils/usersApi";
 import Profile from "../Profile/Profile";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -37,6 +38,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -67,35 +69,75 @@ function App() {
     setActiveModal("login");
   };
 
+  const performSignin = async (email, password) => {
+    try {
+      const res = await signin(itemsBaseUrl, { email, password });
+      if (res && res.token) {
+        localStorage.setItem("jwt", res.token);
+        // fetch current user and store in state
+        try {
+          const user = await getCurrentUser(itemsBaseUrl, res.token);
+          setCurrentUser(user);
+        } catch (e) {
+          console.error("Failed to fetch current user:", e);
+        }
+        setIsLoggedIn(true);
+        return res;
+      } else {
+        throw new Error("No token in response");
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
   const handleLogin = async (credentials) => {
     try {
       setIsLoading(true);
-      // API call would go here
-      console.log("Login attempt with:", credentials);
-      // Example: await loginUser(credentials)
-      setIsLoggedIn(true);
+      const res = await performSignin(credentials.email, credentials.password);
+      console.log("Login successful", res);
       setActiveModal("");
-      setIsLoading(false);
     } catch (error) {
+      console.error(error);
+      throw error;
+    } finally {
       setIsLoading(false);
-      throw new Error(error);
     }
   };
 
   const handleRegister = async (credentials) => {
     try {
       setIsLoading(true);
-      // API call would go here
-      console.log("Register attempt with:", credentials);
-      // Example: await registerUser(credentials)
-      setIsLoggedIn(true);
+      // register user
+      const registerRes = await signup(itemsBaseUrl, credentials);
+      console.log("Register response", registerRes);
+      // immediately sign in the new user
+      await performSignin(credentials.email, credentials.password);
       setActiveModal("");
-      setIsLoading(false);
     } catch (error) {
+      console.error(error);
+      throw error;
+    } finally {
       setIsLoading(false);
-      throw new Error(error);
     }
   };
+
+  // On mount, check for token and restore session
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (!token) return;
+    setIsLoading(true);
+    getCurrentUser(itemsBaseUrl, token)
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        console.error("Failed to restore session:", err);
+        localStorage.removeItem("jwt");
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   const closeActiveModal = () => {
     setActiveModal("");
@@ -218,6 +260,13 @@ function App() {
             handleRegisterClick={handleRegisterClick}
             weatherData={weatherData}
             isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+            onLogout={() => {
+              // clear session
+              localStorage.removeItem("jwt");
+              setIsLoggedIn(false);
+              setCurrentUser(null);
+            }}
           />
           <Routes>
             <Route

@@ -13,11 +13,13 @@ function Header({
   handleRegisterClick,
   weatherData,
   isLoggedIn,
+  currentUser,
+  onLogout,
 }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const username = "Terrence Tegegne";
-  const avatar = avatarDefault;
+  const username = currentUser?.name || "Terrence Tegegne";
+  const avatar = currentUser?.avatar || avatarDefault;
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -74,22 +76,31 @@ function Header({
           </>
         )}
         {isLoggedIn && (
-          <NavLink className="header__nav-link" to="/profile">
-            <div className="header__user-container">
-              <p className="header__username">{username}</p>
-              {avatar ? (
-                <img
-                  src={avatar || avatarDefault}
-                  alt="user avatar"
-                  className="header__avatar"
-                />
-              ) : (
-                <span className="header__avatar header__avatar_none">
-                  {username?.toUpperCase().charAt(0) || ""}
-                </span>
-              )}
-            </div>
-          </NavLink>
+          <>
+            <NavLink className="header__nav-link" to="/profile">
+              <div className="header__user-container">
+                <p className="header__username">{username}</p>
+                {avatar ? (
+                  <img
+                    src={avatar || avatarDefault}
+                    alt="user avatar"
+                    className="header__avatar"
+                  />
+                ) : (
+                  <span className="header__avatar header__avatar_none">
+                    {username?.toUpperCase().charAt(0) || ""}
+                  </span>
+                )}
+              </div>
+            </NavLink>
+            <button
+              type="button"
+              className="header__logout-btn"
+              onClick={onLogout}
+            >
+              Log out
+            </button>
+          </>
         )}
       </div>
     </div>
