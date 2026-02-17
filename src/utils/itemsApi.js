@@ -5,10 +5,13 @@ export const getItems = (itemsBaseUrl) => {
   });
 };
 
-export const addItem = async (itemsBaseUrl, inputValues) => {
+export const addItem = async (itemsBaseUrl, token, inputValues) => {
   const response = await fetch(`${itemsBaseUrl}/items`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify(inputValues),
   });
   if (!response.ok) {
@@ -20,10 +23,13 @@ export const addItem = async (itemsBaseUrl, inputValues) => {
   return data;
 };
 
-export const deleteItem = (itemsBaseUrl, itemId) => {
+export const deleteItem = (itemsBaseUrl, token, itemId) => {
   return request(`${itemsBaseUrl}/items/${itemId}`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
 const request = (url, options) => {

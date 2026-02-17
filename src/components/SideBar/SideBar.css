@@ -32,6 +32,32 @@
   font-weight: 700;
 }
 
+.sidebar__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar__btn {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.sidebar__btn_danger {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
 @media (max-width: 768px) {
   .sidebar__profile {
     justify-content: flex-end;

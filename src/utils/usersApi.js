@@ -31,3 +31,14 @@ export const getCurrentUser = (baseUrl, token) => {
     },
   });
 };
+
+export const updateUser = (baseUrl, token, userData) => {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData),
+  });
+};

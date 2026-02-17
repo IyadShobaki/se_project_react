@@ -14,7 +14,6 @@ function Header({
   weatherData,
   isLoggedIn,
   currentUser,
-  onLogout,
 }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -76,31 +75,22 @@ function Header({
           </>
         )}
         {isLoggedIn && (
-          <>
-            <NavLink className="header__nav-link" to="/profile">
-              <div className="header__user-container">
-                <p className="header__username">{username}</p>
-                {avatar ? (
-                  <img
-                    src={avatar || avatarDefault}
-                    alt="user avatar"
-                    className="header__avatar"
-                  />
-                ) : (
-                  <span className="header__avatar header__avatar_none">
-                    {username?.toUpperCase().charAt(0) || ""}
-                  </span>
-                )}
-              </div>
-            </NavLink>
-            <button
-              type="button"
-              className="header__logout-btn"
-              onClick={onLogout}
-            >
-              Log out
-            </button>
-          </>
+          <NavLink className="header__nav-link" to="/profile">
+            <div className="header__user-container">
+              <p className="header__username">{username}</p>
+              {avatar ? (
+                <img
+                  src={avatar || avatarDefault}
+                  alt="user avatar"
+                  className="header__avatar"
+                />
+              ) : (
+                <span className="header__avatar header__avatar_none">
+                  {username?.toUpperCase().charAt(0) || ""}
+                </span>
+              )}
+            </div>
+          </NavLink>
         )}
       </div>
     </div>

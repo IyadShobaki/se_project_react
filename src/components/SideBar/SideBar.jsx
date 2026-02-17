@@ -1,8 +1,13 @@
 import "./SideBar.css";
+import { useContext } from "react";
 import avatarDefault from "../../assets/images/avatarDefault.png";
-function SideBar() {
-  const username = "Terrence Tegegne";
-  const avatar = avatarDefault;
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
+function SideBar({ onLogout, onUpdateProfile, onOpenUpdateModal }) {
+  const currentUser = useContext(CurrentUserContext);
+  const username = currentUser?.name || "Terrence Tegegne";
+  const avatar = currentUser?.avatar || avatarDefault;
+
   return (
     <aside className="sidebar">
       <div className="sidebar__profile">
@@ -18,6 +23,14 @@ function SideBar() {
             {username?.toUpperCase().charAt(0) || ""}
           </span>
         )}
+      </div>
+      <div className="sidebar__actions">
+        <button className="sidebar__btn" onClick={onOpenUpdateModal}>
+          Change profile data
+        </button>
+        <button className="sidebar__btn sidebar__btn_danger" onClick={onLogout}>
+          Log out
+        </button>
       </div>
     </aside>
   );

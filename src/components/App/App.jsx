@@ -15,10 +15,17 @@ import {
   itemsBaseUrl,
 } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import { signup, signin, getCurrentUser } from "../../utils/usersApi";
+import UpdateProfileModal from "../UpdateProfileModal/UpdateProfileModal";
+import {
+  signup,
+  signin,
+  getCurrentUser,
+  updateUser,
+} from "../../utils/usersApi";
 import Profile from "../Profile/Profile";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -122,6 +129,22 @@ function App() {
     }
   };
 
+  const handleUpdateProfile = async (updatedData) => {
+    try {
+      setIsLoading(true);
+      const token = localStorage.getItem("jwt");
+      if (!token) throw new Error("No token");
+      const res = await updateUser(itemsBaseUrl, token, updatedData);
+      setCurrentUser(res);
+      return res;
+    } catch (err) {
+      console.error("Failed to update profile:", err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // On mount, check for token and restore session
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -149,7 +172,8 @@ function App() {
   };
   const handleConfirmDeleteItem = () => {
     if (selectedItemId === -1) return;
-    deleteItem(itemsBaseUrl, selectedItemId)
+    const token = localStorage.getItem("jwt");
+    deleteItem(itemsBaseUrl, token, selectedItemId)
       .then(() => {
         const newClothingItems = clothingItems.filter((item) => {
           return item._id != selectedItemId;
@@ -168,7 +192,8 @@ function App() {
   const handleAddItem = async (inputValues) => {
     try {
       setIsLoading(true);
-      const data = await addItem(itemsBaseUrl, inputValues);
+      const token = localStorage.getItem("jwt");
+      const data = await addItem(itemsBaseUrl, token, inputValues);
       setClothingItems([data, ...clothingItems]);
       closeActiveModal();
       setIsLoading(false);
@@ -249,86 +274,101 @@ function App() {
   }, [activeModal]);
 
   return (
-    <CurrentTemperatureUnitContext.Provider
-      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-    >
-      <div className="page">
-        <div className="page__content">
-          <Header
-            handleAddClick={handleAddClick}
-            handleLoginClick={handleLoginClick}
-            handleRegisterClick={handleRegisterClick}
-            weatherData={weatherData}
-            isLoggedIn={isLoggedIn}
-            currentUser={currentUser}
-            onLogout={() => {
-              // clear session
-              localStorage.removeItem("jwt");
-              setIsLoggedIn(false);
-              setCurrentUser(null);
-            }}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  weatherData={weatherData}
-                  clothingItems={clothingItems}
-                  handleCardClick={handleCardClick}
-                />
-              }
+    <CurrentUserContext.Provider value={currentUser}>
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <div className="page">
+          <div className="page__content">
+            <Header
+              handleAddClick={handleAddClick}
+              handleLoginClick={handleLoginClick}
+              handleRegisterClick={handleRegisterClick}
+              weatherData={weatherData}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
+              onLogout={() => {
+                // clear session
+                localStorage.removeItem("jwt");
+                setIsLoggedIn(false);
+                setCurrentUser(null);
+              }}
             />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Profile
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    weatherData={weatherData}
                     clothingItems={clothingItems}
                     handleCardClick={handleCardClick}
-                    handleAddClick={handleAddClick}
                   />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      clothingItems={clothingItems}
+                      handleCardClick={handleCardClick}
+                      handleAddClick={handleAddClick}
+                      onLogout={() => {
+                        localStorage.removeItem("jwt");
+                        setIsLoggedIn(false);
+                        setCurrentUser(null);
+                      }}
+                      onUpdateProfile={handleUpdateProfile}
+                      onOpenUpdateModal={() => setActiveModal("update-profile")}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
 
-          <Footer />
+            <Footer />
+          </div>
+          <AddItemModal
+            isOpenModal={activeModal === "add-garment"}
+            onAddItem={handleAddItem}
+            onCloseModal={closeActiveModal}
+            isLoading={isLoading}
+          />
+          <ItemModal
+            isOpen={activeModal === "preview"}
+            card={selectedCard}
+            onClose={closeActiveModal}
+            onDeleteItem={handleDeleteItem}
+          />
+          <ConfirmationModal
+            isOpen={activeModal === "confirm-deleting"}
+            onClose={closeActiveModal}
+            onDeleteItem={handleConfirmDeleteItem}
+            onCancelDeletingItem={handleCancelDeleteItem}
+          />
+          <LoginModal
+            isOpen={activeModal === "login"}
+            onLogin={handleLogin}
+            onClose={closeActiveModal}
+            onNavigateRegister={handleLoginNavigateRegister}
+            isLoading={isLoading}
+          />
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            onRegister={handleRegister}
+            onClose={closeActiveModal}
+            onNavigateLogin={handleRegisterNavigateLogin}
+            isLoading={isLoading}
+          />
+          <UpdateProfileModal
+            isOpen={activeModal === "update-profile"}
+            onUpdate={handleUpdateProfile}
+            onClose={closeActiveModal}
+            isLoading={isLoading}
+          />
         </div>
-        <AddItemModal
-          isOpenModal={activeModal === "add-garment"}
-          onAddItem={handleAddItem}
-          onCloseModal={closeActiveModal}
-          isLoading={isLoading}
-        />
-        <ItemModal
-          isOpen={activeModal === "preview"}
-          card={selectedCard}
-          onClose={closeActiveModal}
-          onDeleteItem={handleDeleteItem}
-        />
-        <ConfirmationModal
-          isOpen={activeModal === "confirm-deleting"}
-          onClose={closeActiveModal}
-          onDeleteItem={handleConfirmDeleteItem}
-          onCancelDeletingItem={handleCancelDeleteItem}
-        />
-        <LoginModal
-          isOpen={activeModal === "login"}
-          onLogin={handleLogin}
-          onClose={closeActiveModal}
-          onNavigateRegister={handleLoginNavigateRegister}
-          isLoading={isLoading}
-        />
-        <RegisterModal
-          isOpen={activeModal === "register"}
-          onRegister={handleRegister}
-          onClose={closeActiveModal}
-          onNavigateLogin={handleRegisterNavigateLogin}
-          isLoading={isLoading}
-        />
-      </div>
-    </CurrentTemperatureUnitContext.Provider>
+      </CurrentTemperatureUnitContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
