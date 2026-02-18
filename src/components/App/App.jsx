@@ -94,6 +94,7 @@ function App() {
    * Opens the registration modal
    */
   const handleRegisterClick = () => {
+    debugger;
     modal.openModal("register");
   };
 
@@ -283,7 +284,6 @@ function App() {
    * Effect: Handle keyboard and overlay modal interaction
    * - Close modal when ESC key is pressed
    * - Close modal when clicking outside (on the overlay)
-   * - Add shake animation to disabled submit button
    *
    * Only runs when the active modal changes to avoid stale event listeners
    */
@@ -300,9 +300,8 @@ function App() {
     };
 
     /**
-     * Handler for clicks on modal overlay or disabled button
+     * Handler for clicks on modal overlay
      * - Closes modal if clicking on the overlay background
-     * - Adds shake animation to disabled buttons
      */
     const handleOverlay = (evt) => {
       if (!evt || !evt.target) return;
@@ -311,25 +310,6 @@ function App() {
         // Close modal if clicking on the modal background
         if (evt.target.classList && evt.target.classList.contains("modal")) {
           modal.closeModal();
-        }
-        // Add shake animation if clicking a disabled button
-        if (
-          evt.target.classList &&
-          evt.target.classList.contains("modal__submit-btn_disabled")
-        ) {
-          evt.target.classList.add("shake");
-          // Store reference to the target element to avoid stale closure
-          const targetElement = evt.target;
-          setTimeout(() => {
-            // Check if the element still exists in the DOM before accessing it
-            if (
-              targetElement &&
-              targetElement.parentNode &&
-              targetElement.classList
-            ) {
-              targetElement.classList.remove("shake");
-            }
-          }, 1000);
         }
       } catch (err) {
         console.error("Error handling overlay event:", err);
