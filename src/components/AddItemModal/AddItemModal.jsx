@@ -50,6 +50,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
             errors.name.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="name"
+          autoComplete="name"
           placeholder="Name"
           required
           minLength="1"

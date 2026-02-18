@@ -63,6 +63,7 @@ function RegisterModal({
             errors.email.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="email"
+          autoComplete="email"
           placeholder="Enter your email"
           required
           value={values.email}
@@ -107,6 +108,7 @@ function RegisterModal({
             errors.name.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="name"
+          autoComplete="name"
           placeholder="Enter your name"
           required
           value={values.name}

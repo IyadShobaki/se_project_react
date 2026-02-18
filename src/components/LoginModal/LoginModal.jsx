@@ -56,6 +56,7 @@ function LoginModal({
             errors.email.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="email"
+          autoComplete="email"
           placeholder="Enter your email"
           required
           value={values.email}

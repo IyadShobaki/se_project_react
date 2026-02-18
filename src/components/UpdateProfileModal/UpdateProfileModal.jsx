@@ -57,6 +57,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
             errors.name.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="name"
+          autoComplete="name"
           placeholder="Enter your name"
           required
           value={values.name}
