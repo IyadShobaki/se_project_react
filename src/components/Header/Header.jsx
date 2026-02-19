@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 
 import "./Header.css";
 import logo from "../../assets/images/logo.svg";
-import avatarDefault from "../../assets/images/avatarDefault.png";
 
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
@@ -16,12 +15,17 @@ function Header({
   currentUser,
 }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
 
-  const username = currentUser?.name || "Terrence Tegegne";
-  const avatar = currentUser?.avatar || avatarDefault;
+  const username = currentUser?.name;
+  const avatar = currentUser?.avatar;
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
+  };
+
+  const handleAvatarError = () => {
+    setAvatarError(true);
   };
 
   const currentDate = new Date().toLocaleString("default", {
@@ -78,11 +82,12 @@ function Header({
           <NavLink className="header__nav-link" to="/profile">
             <div className="header__user-container">
               <p className="header__username">{username}</p>
-              {avatar ? (
+              {avatar && !avatarError ? (
                 <img
-                  src={avatar || avatarDefault}
+                  src={avatar}
                   alt="user avatar"
                   className="header__avatar"
+                  onError={handleAvatarError}
                 />
               ) : (
                 <span className="header__avatar header__avatar_none">

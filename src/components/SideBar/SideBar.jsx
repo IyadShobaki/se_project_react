@@ -1,23 +1,28 @@
 import "./SideBar.css";
-import { useContext } from "react";
-import avatarDefault from "../../assets/images/avatarDefault.png";
+import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SideBar({ onLogout, onOpenUpdateModal }) {
   const userContext = useContext(CurrentUserContext);
-  const currentUser = userContext?.currentUser;
-  const username = currentUser?.name || "Terrence Tegegne";
-  const avatar = currentUser?.avatar || avatarDefault;
+  const [avatarError, setAvatarError] = useState(false);
 
+  const currentUser = userContext?.currentUser;
+  const username = currentUser?.name;
+  const avatar = currentUser?.avatar;
+
+  const handleAvatarError = () => {
+    setAvatarError(true);
+  };
   return (
     <aside className="sidebar">
       <div className="sidebar__profile">
         <p className="sidebar__username">{username}</p>
-        {avatar ? (
+        {avatar && !avatarError ? (
           <img
-            src={avatar || avatarDefault}
+            src={avatar}
             alt="user avatar"
             className="sidebar__avatar"
+            onError={handleAvatarError}
           />
         ) : (
           <span className="sidebar__avatar sidebar__avatar_none">
