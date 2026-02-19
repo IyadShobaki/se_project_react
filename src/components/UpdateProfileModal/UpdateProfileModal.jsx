@@ -34,6 +34,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
         avatar: values.avatar,
       });
       resetForm();
+      onClose();
     } catch (error) {
       alert("Failed to update profile. Please try again later.");
     }

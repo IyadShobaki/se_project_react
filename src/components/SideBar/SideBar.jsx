@@ -4,7 +4,8 @@ import avatarDefault from "../../assets/images/avatarDefault.png";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SideBar({ onLogout, onOpenUpdateModal }) {
-  const currentUser = useContext(CurrentUserContext);
+  const userContext = useContext(CurrentUserContext);
+  const currentUser = userContext?.currentUser;
   const username = currentUser?.name || "Terrence Tegegne";
   const avatar = currentUser?.avatar || avatarDefault;
 
