@@ -200,9 +200,12 @@ function App() {
    */
   const handleAddItem = async (inputValues) => {
     try {
-      const data = await itemService.addItem(itemsBaseUrl, inputValues);
+      const { data: newItem } = await itemService.addItem(
+        itemsBaseUrl,
+        inputValues,
+      );
       // Add new item to the beginning of the list
-      setClothingItems([data, ...clothingItems]);
+      setClothingItems([newItem, ...clothingItems]);
       modal.closeModal();
     } catch (error) {
       console.error(error);
