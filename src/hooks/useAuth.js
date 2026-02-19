@@ -103,7 +103,11 @@ export const useAuth = (baseUrl) => {
       setIsLoading(true);
       setError(null);
       // Try to get current user using stored token
-      const { data: user } = await authService.restoreSession(baseUrl);
+      const data = await authService.restoreSession(baseUrl);
+      if (!data) {
+        return;
+      }
+      const { data: user } = data;
       if (user) {
         setCurrentUser(user);
         setIsLoggedIn(true);
