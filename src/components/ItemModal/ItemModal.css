@@ -44,7 +44,7 @@
   align-self: flex-start;
 }
 
-.modal__delete-button_hidden {
+.modal__delete-btn_hidden {
   display: none;
 }
 

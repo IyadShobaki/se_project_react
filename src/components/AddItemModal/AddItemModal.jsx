@@ -6,7 +6,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
   const defaulValues = {
     name: "",
     imageUrl: "",
-    weather: "hot",
+    weather: "",
   };
   const { values, errors, isValid, handleChange, resetForm } =
     useFormWithValidation(defaulValues);
