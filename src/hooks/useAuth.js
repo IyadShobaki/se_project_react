@@ -76,7 +76,7 @@ export const useAuth = (baseUrl) => {
         // Call the signin service
         await authService.signin(baseUrl, { email, password });
         // Fetch and store the current user's data
-        const user = await authService.getCurrentUser(baseUrl);
+        const { data: user } = await authService.getCurrentUser(baseUrl);
         if (user) {
           setCurrentUser(user);
           setIsLoggedIn(true);
@@ -103,7 +103,7 @@ export const useAuth = (baseUrl) => {
       setIsLoading(true);
       setError(null);
       // Try to get current user using stored token
-      const user = await authService.restoreSession(baseUrl);
+      const { data: user } = await authService.restoreSession(baseUrl);
       if (user) {
         setCurrentUser(user);
         setIsLoggedIn(true);
@@ -127,7 +127,10 @@ export const useAuth = (baseUrl) => {
         setIsLoading(true);
         setError(null);
         // Call the update user service and store updated data
-        const updatedUser = await authService.updateUser(baseUrl, updatedData);
+        const { data: updatedUser } = await authService.updateUser(
+          baseUrl,
+          updatedData,
+        );
         setCurrentUser(updatedUser);
         return updatedUser;
       } catch (err) {

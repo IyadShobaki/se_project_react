@@ -1,19 +1,29 @@
 import "./UpdateProfileModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
-  const currentUser = useContext(CurrentUserContext);
+  const userContext = useContext(CurrentUserContext);
+  const currentUser = userContext?.currentUser;
 
   const defaultValues = {
-    name: currentUser?.name || "",
-    avatar: currentUser?.avatar || "",
+    name: "",
+    avatar: "",
   };
 
-  const { values, errors, isValid, handleChange, resetForm } =
+  const { values, errors, isValid, handleChange, resetForm, setValues } =
     useFormWithValidation(defaultValues);
+
+  useEffect(() => {
+    if (isOpen && currentUser) {
+      setValues({
+        name: currentUser.name || "",
+        avatar: currentUser.avatar || "",
+      });
+    }
+  }, [isOpen, currentUser, setValues]);
 
   const handleSubmit = async () => {
     if (!isValid) return;

@@ -94,7 +94,6 @@ function App() {
    * Opens the registration modal
    */
   const handleRegisterClick = () => {
-    debugger;
     modal.openModal("register");
   };
 
