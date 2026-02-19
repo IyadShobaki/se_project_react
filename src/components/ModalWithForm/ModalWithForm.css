@@ -163,7 +163,7 @@
 .modal__submit-btn_disabled {
   background-color: rgba(0, 0, 0, 0.3);
   cursor: default;
-  /* pointer-events: none; */
+  pointer-events: none;
 }
 
 @media (max-width: 830px) {

@@ -105,7 +105,11 @@ export const useFormWithValidation = (initialValues, fieldConfigs = {}) => {
     [validateField],
   );
 
-  const isValid = !Object.values(errors).some((error) => error.length > 0);
+  const isValid =
+    !Object.values(errors).some((error) => error.length > 0) &&
+    !Object.values(values).some(
+      (value) => typeof value === "string" && value.trim().length === 0,
+    );
 
   const resetForm = useCallback(() => {
     setValues(initialValues);
