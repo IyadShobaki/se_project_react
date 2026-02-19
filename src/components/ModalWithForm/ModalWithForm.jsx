@@ -39,9 +39,10 @@ function ModalWithForm({
           {children}
           <button
             type="submit"
+            disabled={!isValid || isLoading}
             className={`modal__submit-btn ${
               !isValid ? "modal__submit-btn_disabled" : ""
-            }`}
+            } ${title === "Change Profile Data" ? "modal__submit-btn_profile" : ""}`}
           >
             {isLoading ? getLoadingBtnText(buttonText) : buttonText}
           </button>

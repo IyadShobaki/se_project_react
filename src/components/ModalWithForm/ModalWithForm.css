@@ -156,6 +156,10 @@
   cursor: pointer;
 }
 
+.modal__submit-btn_profile {
+  max-width: 128px;
+}
+
 .modal__submit-btn:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }

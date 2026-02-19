@@ -64,7 +64,7 @@ function RegisterModal({
           }`}
           id="email"
           autoComplete="email"
-          placeholder="Enter your email"
+          placeholder="Email"
           required
           value={values.email}
           onChange={handleChange}
@@ -86,7 +86,7 @@ function RegisterModal({
             errors.password.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="password"
-          placeholder="Create a password"
+          placeholder="Password"
           required
           value={values.password}
           onChange={handleChange}
@@ -109,7 +109,7 @@ function RegisterModal({
           }`}
           id="name"
           autoComplete="name"
-          placeholder="Enter your name"
+          placeholder="Name"
           required
           value={values.name}
           onChange={handleChange}
@@ -131,7 +131,7 @@ function RegisterModal({
             errors.avatar.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="avatar"
-          placeholder="Enter your avatar URL"
+          placeholder="Avatar URL"
           required
           value={values.avatar}
           onChange={handleChange}

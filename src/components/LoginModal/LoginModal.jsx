@@ -57,7 +57,7 @@ function LoginModal({
           }`}
           id="email"
           autoComplete="email"
-          placeholder="Enter your email"
+          placeholder="Email"
           required
           value={values.email}
           onChange={handleChange}
@@ -79,7 +79,7 @@ function LoginModal({
             errors.password.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="password"
-          placeholder="Enter your password"
+          placeholder="Password"
           required
           value={values.password}
           onChange={handleChange}

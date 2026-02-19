@@ -43,7 +43,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
   return (
     <ModalWithForm
       title="Change Profile Data"
-      buttonText="Save"
+      buttonText="Save changes"
       isOpen={isOpen}
       onSubmit={handleSubmit}
       onClose={onClose}
@@ -69,7 +69,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
           }`}
           id="name"
           autoComplete="name"
-          placeholder="Enter your name"
+          placeholder="Name"
           required
           value={values.name}
           onChange={handleChange}
@@ -91,7 +91,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
             errors.avatar.length > 0 ? "modal__input_type_error" : ""
           }`}
           id="avatar"
-          placeholder="Enter your avatar URL"
+          placeholder="Avatar URL"
           required
           value={values.avatar}
           onChange={handleChange}
