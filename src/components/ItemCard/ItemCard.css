@@ -44,7 +44,7 @@
 }
 
 .card__like-btn:hover {
-  background: url(../../assets/images/like-red-heart.svg);
+  background: url(../../assets/images/liked.svg);
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
