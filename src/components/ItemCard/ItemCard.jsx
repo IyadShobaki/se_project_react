@@ -7,7 +7,7 @@ function ItemCard({ item, onCardClick }) {
     <li className="card">
       <div className="card__title-and-like">
         <h2 className="card__name">{item.name}</h2>
-        <button className="card__like-btn"></button>
+        <input type="checkbox" className="card__like-btn" />
       </div>
       <img
         onClick={handleCardClick}
