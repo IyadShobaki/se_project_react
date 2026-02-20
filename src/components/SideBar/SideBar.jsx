@@ -34,7 +34,7 @@ function SideBar({ onLogout, onOpenUpdateModal }) {
         <button className="sidebar__btn" onClick={onOpenUpdateModal}>
           Change profile data
         </button>
-        <button className="sidebar__btn sidebar__btn_danger" onClick={onLogout}>
+        <button className="sidebar__btn" onClick={onLogout}>
           Log out
         </button>
       </div>
