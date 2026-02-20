@@ -8,6 +8,8 @@ function ModalWithForm({
   onClose,
   isLoading,
   isValid,
+  onNavigateLogin,
+  onNavigateRegister,
 }) {
   const getLoadingBtnText = (text) => {
     const firstWord = text.split(" ")[0];
@@ -46,6 +48,30 @@ function ModalWithForm({
           >
             {isLoading ? getLoadingBtnText(buttonText) : buttonText}
           </button>
+          {title === "Sign Up" && (
+            <p className="modal__link-text modal__link-text_register">
+              or{" "}
+              <button
+                type="button"
+                className="modal__link-button"
+                onClick={onNavigateLogin}
+              >
+                Log in
+              </button>
+            </p>
+          )}
+          {title === "Log In" && (
+            <p className="modal__link-text modal__link-text_login">
+              or{" "}
+              <button
+                type="button"
+                className="modal__link-button"
+                onClick={onNavigateRegister}
+              >
+                Register
+              </button>
+            </p>
+          )}
         </form>
       </div>
     </div>

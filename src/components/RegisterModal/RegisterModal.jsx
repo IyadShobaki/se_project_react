@@ -46,6 +46,7 @@ function RegisterModal({
       inputValues={values}
       isLoading={isLoading}
       isValid={isValid}
+      onNavigateLogin={onNavigateLogin}
     >
       <label
         htmlFor="email"
@@ -137,16 +138,6 @@ function RegisterModal({
           onChange={handleChange}
         />
       </label>
-      <p className="modal__link-text modal__link-text_register">
-        or{" "}
-        <button
-          type="button"
-          className="modal__link-button"
-          onClick={onNavigateLogin}
-        >
-          Log in
-        </button>
-      </p>
     </ModalWithForm>
   );
 }
