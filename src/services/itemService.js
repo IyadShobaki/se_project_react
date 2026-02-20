@@ -63,4 +63,44 @@ export const itemService = {
     // Send DELETE request to remove the item
     return apiClient.delete(`/items/${itemId}`);
   },
+
+  /**
+   * Add a like to a clothing item
+   * Requires authentication
+   * Adds the current user's ID to the item's likes array
+   * @param {string} baseUrl - Backend API base URL
+   * @param {string} itemId - The ID of the item to like
+   * @returns {Promise<Object>} Updated item data
+   * @throws {Error} If not authenticated
+   */
+  async addCardLike(baseUrl, itemId) {
+    // Check if user is authenticated
+    const token = tokenManager.get();
+    if (!token) throw new Error("No token found");
+
+    const apiClient = new ApiClient(baseUrl);
+    apiClient.setToken(token);
+    // Send PUT request to add like
+    return apiClient.put(`/items/${itemId}/likes`);
+  },
+
+  /**
+   * Remove a like from a clothing item
+   * Requires authentication
+   * Removes the current user's ID from the item's likes array
+   * @param {string} baseUrl - Backend API base URL
+   * @param {string} itemId - The ID of the item to unlike
+   * @returns {Promise<Object>} Updated item data
+   * @throws {Error} If not authenticated
+   */
+  async removeCardLike(baseUrl, itemId) {
+    // Check if user is authenticated
+    const token = tokenManager.get();
+    if (!token) throw new Error("No token found");
+
+    const apiClient = new ApiClient(baseUrl);
+    apiClient.setToken(token);
+    // Send DELETE request to remove like
+    return apiClient.delete(`/items/${itemId}/likes`);
+  },
 };

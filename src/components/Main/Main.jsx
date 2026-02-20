@@ -5,12 +5,12 @@ import ItemCard from "../ItemCard/ItemCard";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Loading from "../Loading/Loading";
 
-function Main({ weatherData, clothingItems, handleCardClick }) {
+function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   let filteredItems = null;
   filteredItems = clothingItems.filter(
-    (item) => item.weather === weatherData.type
+    (item) => item.weather === weatherData.type,
   );
 
   return (
@@ -38,6 +38,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  onCardLike={onCardLike}
                 />
               );
             })}

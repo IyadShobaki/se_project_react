@@ -117,6 +117,19 @@ class ApiClient {
   }
 
   /**
+   * Make a PUT request (for full updates)
+   * @param {string} endpoint - API endpoint
+   * @param {Object} data - Updated data to send (optional)
+   * @returns {Promise<Object>} Response data
+   */
+  put(endpoint, data) {
+    return this.request(endpoint, {
+      method: "PUT",
+      body: data ? JSON.stringify(data) : undefined,
+    });
+  }
+
+  /**
    * Make a DELETE request
    * @param {string} endpoint - API endpoint
    * @returns {Promise<Object>} Response data

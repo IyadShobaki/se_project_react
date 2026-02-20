@@ -5,6 +5,7 @@ import SideBar from "../SideBar/SideBar";
 function Profile({
   clothingItems,
   handleCardClick,
+  onCardLike,
   handleAddClick,
   onLogout,
   onUpdateProfile,
@@ -21,6 +22,7 @@ function Profile({
         handleAddClick={handleAddClick}
         clothingItems={clothingItems}
         handleCardClick={handleCardClick}
+        onCardLike={onCardLike}
       />
     </section>
   );

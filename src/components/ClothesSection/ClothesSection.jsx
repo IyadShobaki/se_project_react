@@ -5,7 +5,12 @@ import ItemCard from "../ItemCard/ItemCard";
 import Loading from "../Loading/Loading";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
+function ClothesSection({
+  clothingItems,
+  handleCardClick,
+  onCardLike,
+  handleAddClick,
+}) {
   const { currentUser } = useContext(CurrentUserContext);
   const filteredItems = clothingItems.filter(
     (item) => item.owner === currentUser?._id,
@@ -34,6 +39,7 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick}
+                onCardLike={onCardLike}
               />
             );
           })}

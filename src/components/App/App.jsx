@@ -77,6 +77,36 @@ function App() {
   };
 
   /**
+   * Handles liking/unliking an item
+   * Toggles the like status and updates the items list
+   * @param {Object} item - The item to like/unlike
+   */
+  const handleCardLike = ({ _id: id, likes }) => {
+    // Check if this item is currently liked by the user
+    const isLiked = likes.some((userId) => userId === auth.currentUser?._id);
+
+    !isLiked
+      ? // If not liked, send a request to add the user's id to the item's likes array
+        itemService
+          .addCardLike(itemsBaseUrl, id)
+          .then((updatedItem) => {
+            setClothingItems((items) =>
+              items.map((item) => (item._id === id ? updatedItem : item)),
+            );
+          })
+          .catch((err) => console.log(err))
+      : // If liked, send a request to remove the user's id from the item's likes array
+        itemService
+          .removeCardLike(itemsBaseUrl, id)
+          .then((updatedItem) => {
+            setClothingItems((items) =>
+              items.map((item) => (item._id === id ? updatedItem : item)),
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
+  /**
    * Opens the modal for adding a new clothing item
    */
   const handleAddClick = () => {
@@ -356,6 +386,7 @@ function App() {
                     weatherData={weatherData}
                     clothingItems={clothingItems}
                     handleCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -366,6 +397,7 @@ function App() {
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
+                      onCardLike={handleCardLike}
                       handleAddClick={handleAddClick}
                       onLogout={() => {
                         auth.logout();
