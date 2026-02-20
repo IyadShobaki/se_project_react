@@ -53,7 +53,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
       isValid={isValid}
     >
       <label
-        htmlFor="name"
+        htmlFor="update-name"
         className={`modal__label ${
           errors.name.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -67,7 +67,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
           className={`modal__input ${
             errors.name.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="name"
+          id="update-name"
           autoComplete="name"
           placeholder="Name"
           required
@@ -76,7 +76,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
         />
       </label>
       <label
-        htmlFor="avatar"
+        htmlFor="update-avatar"
         className={`modal__label ${
           errors.avatar.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -90,7 +90,7 @@ function UpdateProfileModal({ isOpen, onUpdate, onClose, isLoading }) {
           className={`modal__input ${
             errors.avatar.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="avatar"
+          id="update-avatar"
           placeholder="Avatar URL"
           required
           value={values.avatar}

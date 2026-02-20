@@ -35,7 +35,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
       isValid={isValid}
     >
       <label
-        htmlFor="name"
+        htmlFor="add-name"
         className={`modal__label ${
           errors.name.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -49,7 +49,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
           className={`modal__input ${
             errors.name.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="name"
+          id="add-name"
           autoComplete="name"
           placeholder="Name"
           required
@@ -60,7 +60,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
         />
       </label>
       <label
-        htmlFor="imageUrl"
+        htmlFor="add-image-url"
         className={`modal__label ${
           errors.imageUrl.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -74,7 +74,7 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
           className={`modal__input ${
             errors.imageUrl.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="imageUrl"
+          id="add-image-url"
           placeholder="Image URL"
           required
           value={values.imageUrl}
@@ -83,11 +83,14 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
       </label>
       <fieldset className="modal__radio-btns">
         <legend className="modal__legend">Select the weather type*:</legend>
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
+        <label
+          htmlFor="add-hot"
+          className="modal__label modal__label_type_radio"
+        >
           <input
             type="radio"
             className="modal__radio-input"
-            id="hot"
+            id="add-hot"
             name="weather"
             checked={values.weather === "hot"}
             required
@@ -96,11 +99,14 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
           />{" "}
           Hot
         </label>
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
+        <label
+          htmlFor="add-warm"
+          className="modal__label modal__label_type_radio"
+        >
           <input
             type="radio"
             className="modal__radio-input"
-            id="warm"
+            id="add-warm"
             name="weather"
             checked={values.weather === "warm"}
             value="warm"
@@ -108,11 +114,14 @@ function AddItemModal({ isOpenModal, onAddItem, onCloseModal, isLoading }) {
           />{" "}
           Warm
         </label>
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
+        <label
+          htmlFor="add-cold"
+          className="modal__label modal__label_type_radio"
+        >
           <input
             type="radio"
             className="modal__radio-input"
-            id="cold"
+            id="add-cold"
             name="weather"
             checked={values.weather === "cold"}
             value="cold"

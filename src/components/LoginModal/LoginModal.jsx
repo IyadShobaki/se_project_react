@@ -42,7 +42,7 @@ function LoginModal({
       onNavigateRegister={onNavigateRegister}
     >
       <label
-        htmlFor="email"
+        htmlFor="login-email"
         className={`modal__label ${
           errors.email.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -56,7 +56,7 @@ function LoginModal({
           className={`modal__input ${
             errors.email.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="email"
+          id="login-email"
           autoComplete="email"
           placeholder="Email"
           required
@@ -65,7 +65,7 @@ function LoginModal({
         />
       </label>
       <label
-        htmlFor="password"
+        htmlFor="login-password"
         className={`modal__label ${
           errors.password.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -79,7 +79,7 @@ function LoginModal({
           className={`modal__input ${
             errors.password.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="password"
+          id="login-password"
           placeholder="Password"
           required
           value={values.password}

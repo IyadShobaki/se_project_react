@@ -49,7 +49,7 @@ function RegisterModal({
       onNavigateLogin={onNavigateLogin}
     >
       <label
-        htmlFor="email"
+        htmlFor="register-email"
         className={`modal__label ${
           errors.email.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -63,7 +63,7 @@ function RegisterModal({
           className={`modal__input ${
             errors.email.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="email"
+          id="register-email"
           autoComplete="email"
           placeholder="Email"
           required
@@ -72,7 +72,7 @@ function RegisterModal({
         />
       </label>
       <label
-        htmlFor="password"
+        htmlFor="register-password"
         className={`modal__label ${
           errors.password.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -86,7 +86,7 @@ function RegisterModal({
           className={`modal__input ${
             errors.password.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="password"
+          id="register-password"
           placeholder="Password"
           required
           value={values.password}
@@ -94,7 +94,7 @@ function RegisterModal({
         />
       </label>
       <label
-        htmlFor="name"
+        htmlFor="register-name"
         className={`modal__label ${
           errors.name.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -108,7 +108,7 @@ function RegisterModal({
           className={`modal__input ${
             errors.name.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="name"
+          id="register-name"
           autoComplete="name"
           placeholder="Name"
           required
@@ -117,7 +117,7 @@ function RegisterModal({
         />
       </label>
       <label
-        htmlFor="avatar"
+        htmlFor="register-avatar"
         className={`modal__label ${
           errors.avatar.length > 0 ? "modal__label_type_error" : ""
         }`}
@@ -131,7 +131,7 @@ function RegisterModal({
           className={`modal__input ${
             errors.avatar.length > 0 ? "modal__input_type_error" : ""
           }`}
-          id="avatar"
+          id="register-avatar"
           placeholder="Avatar URL"
           required
           value={values.avatar}
