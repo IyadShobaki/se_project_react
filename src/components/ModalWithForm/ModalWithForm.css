@@ -140,10 +140,17 @@
 .modal__radio-input:checked {
   accent-color: #000;
 }
+
+.modal__button-container {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+}
+
 .modal__submit-btn {
   max-width: 124px;
   padding: 0;
-  margin: 32px 0 0;
+  margin: 0;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0);
   border-radius: 4px;
@@ -168,6 +175,32 @@
   background-color: rgba(0, 0, 0, 0.3);
   cursor: default;
   pointer-events: none;
+}
+
+.modal__link-text {
+  margin: 0 0 0 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #00000080;
+  display: inline;
+}
+
+.modal__link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #00000080;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.modal__link-button:hover {
+  color: #000000;
 }
 
 @media (max-width: 830px) {
