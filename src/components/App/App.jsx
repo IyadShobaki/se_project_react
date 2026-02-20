@@ -83,15 +83,24 @@ function App() {
    * @param {Object} item - The item to like/dislike
    */
   const handleCardLike = (id, isLiked) => {
-    !isLiked
+    const request = !isLiked
       ? // If not liked, send a request to add the user's id to the item's likes array
-        itemService
-          .addCardLike(itemsBaseUrl, id)
-          .catch((err) => console.log(err))
+        itemService.addCardLike(itemsBaseUrl, id)
       : // If liked, send a request to remove the user's id from the item's likes array
-        itemService
-          .removeCardLike(itemsBaseUrl, id)
-          .catch((err) => console.log(err));
+        itemService.removeCardLike(itemsBaseUrl, id);
+
+    return request
+      .then((response) => {
+        const updatedItem = response?.data ?? response;
+        if (!updatedItem?._id) return;
+
+        setClothingItems((prevItems) =>
+          prevItems.map((item) =>
+            item._id === updatedItem._id ? updatedItem : item,
+          ),
+        );
+      })
+      .catch((err) => console.error(err));
   };
 
   /**
