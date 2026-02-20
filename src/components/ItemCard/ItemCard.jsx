@@ -1,18 +1,15 @@
 import "./ItemCard.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const { currentUser } = useContext(CurrentUserContext);
 
-  // Check if the item was liked by the current user
-  // The likes array should be an array of user ids
-  const isLiked = item.likes?.some((id) => id === currentUser?._id);
+  // Check if the item was liked by the current user initially
+  const initialIsLiked = item.likes?.some((id) => id === currentUser?._id);
 
-  // // Create a variable for the like button className
-  // const itemLikeButtonClassName = `card__like-btn ${
-  //   isLiked ? "card__like-btn--liked" : ""
-  // }`;
+  // Local state for checkbox
+  const [isLiked, setIsLiked] = useState(initialIsLiked);
 
   const handleCardClick = () => {
     onCardClick(item);
@@ -21,7 +18,10 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   const handleLike = () => {
     // Only allow liking if user is logged in
     if (currentUser) {
-      onCardLike(item);
+      // Toggle checkbox state immediately
+      setIsLiked(!isLiked);
+      // Call the API
+      onCardLike(item._id, isLiked);
     }
   };
 

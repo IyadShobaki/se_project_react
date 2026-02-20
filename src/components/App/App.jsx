@@ -77,32 +77,19 @@ function App() {
   };
 
   /**
-   * Handles liking/unliking an item
+   * Handles liking/dislike an item
    * Toggles the like status and updates the items list
-   * @param {Object} item - The item to like/unlike
+   * @param {Object} item - The item to like/dislike
    */
-  const handleCardLike = ({ _id: id, likes }) => {
-    // Check if this item is currently liked by the user
-    const isLiked = likes.some((userId) => userId === auth.currentUser?._id);
-
+  const handleCardLike = (id, isLiked) => {
     !isLiked
       ? // If not liked, send a request to add the user's id to the item's likes array
         itemService
           .addCardLike(itemsBaseUrl, id)
-          .then((updatedItem) => {
-            setClothingItems((items) =>
-              items.map((item) => (item._id === id ? updatedItem : item)),
-            );
-          })
           .catch((err) => console.log(err))
       : // If liked, send a request to remove the user's id from the item's likes array
         itemService
           .removeCardLike(itemsBaseUrl, id)
-          .then((updatedItem) => {
-            setClothingItems((items) =>
-              items.map((item) => (item._id === id ? updatedItem : item)),
-            );
-          })
           .catch((err) => console.log(err));
   };
 
