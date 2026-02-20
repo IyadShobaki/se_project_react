@@ -78,4 +78,5 @@ export const defaultCoordinates = {
 
 export const apiKey = "c8ff33cb0abbf207982ca50c9ca1841a";
 
+// Backend API base URL
 export const itemsBaseUrl = "http://localhost:3001";

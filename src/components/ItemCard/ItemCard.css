@@ -30,6 +30,9 @@
   border-radius: 4px;
 }
 .card__like-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   background-image: url(../../assets/images/like.svg);
   width: 25px;
   height: 25px;
@@ -44,7 +47,16 @@
 }
 
 .card__like-btn:hover {
-  background: url(../../assets/images/like-red-heart.svg);
+  background: url(../../assets/images/liked.svg);
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+}
+
+.card__like-btn:checked {
+  background: url(../../assets/images/liked.svg);
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;

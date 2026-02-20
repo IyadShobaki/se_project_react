@@ -1,10 +1,20 @@
 import "./ClothesSection.css";
 
+import { useContext } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import Loading from "../Loading/Loading";
-function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
-  let filteredItems = null;
-  filteredItems = clothingItems.filter((item) => item.weather === item.weather);
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
+function ClothesSection({
+  clothingItems,
+  handleCardClick,
+  onCardLike,
+  handleAddClick,
+}) {
+  const { currentUser } = useContext(CurrentUserContext);
+  const filteredItems = clothingItems.filter(
+    (item) => item.owner === currentUser?._id,
+  );
   return (
     <div className="clothes-section">
       <div className="clothes-section__row">
@@ -29,6 +39,7 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick}
+                onCardLike={onCardLike}
               />
             );
           })}
