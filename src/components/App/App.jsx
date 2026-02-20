@@ -12,7 +12,7 @@
  */
 
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -40,6 +40,7 @@ import { useModal } from "../../hooks/useModal";
 import { itemService } from "../../services/itemService";
 
 function App() {
+  const navigate = useNavigate();
   // State for clothing items list
   const [clothingItems, setClothingItems] = useState([]);
 
@@ -137,6 +138,7 @@ function App() {
     try {
       await auth.signin(credentials.email, credentials.password);
       modal.closeModal();
+      navigate("/");
     } catch (error) {
       console.error(error);
       throw error;
@@ -360,7 +362,6 @@ function App() {
               handleRegisterClick={handleRegisterClick}
               weatherData={weatherData}
               isLoggedIn={auth.isLoggedIn}
-              currentUser={auth.currentUser}
               onLogout={() => {
                 auth.logout();
               }}

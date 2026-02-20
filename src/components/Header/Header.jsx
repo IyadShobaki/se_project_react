@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Header.css";
 import logo from "../../assets/images/logo.svg";
 
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Header({
   handleAddClick,
@@ -12,8 +13,8 @@ function Header({
   handleRegisterClick,
   weatherData,
   isLoggedIn,
-  currentUser,
 }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
 
