@@ -29,7 +29,9 @@ function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
         {weatherData.temp[currentTemperatureUnit] === 999 ? (
           <Loading name="loading-items-main" />
         ) : filteredItems.length === 0 ? (
-          <p className="main__text">Items not found!</p>
+          <p className="main__text main__empty-message">
+            No items match today's weather
+          </p>
         ) : (
           <ul className="main__list">
             {filteredItems.map((item) => {

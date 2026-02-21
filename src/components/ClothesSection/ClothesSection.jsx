@@ -30,7 +30,9 @@ function ClothesSection({
       {!filteredItems ? (
         <Loading name="loading-items-clothes-section" />
       ) : filteredItems.length === 0 ? (
-        <p className="clothes-section__text">Items not found!</p>
+        <p className="clothes-section__text clothes-section__empty-message">
+          Your wardrobe is empty. Add some items!
+        </p>
       ) : (
         <ul className="clothes-section__list">
           {filteredItems.map((item) => {
