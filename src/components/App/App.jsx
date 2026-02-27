@@ -24,7 +24,7 @@ import { filterWeatherData, getWeather } from "../../utils/weatherApi";
 import {
   apiKey,
   defaultCoordinates,
-  itemsBaseUrl,
+  wtwrApiBaseUrl,
 } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -57,7 +57,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   // Custom hook for managing authentication (login, logout, user data, loading)
-  const auth = useAuth(itemsBaseUrl);
+  const auth = useAuth(wtwrApiBaseUrl);
 
   // Custom hook for managing modal state (open, close, selection)
   const modal = useModal();
@@ -85,9 +85,9 @@ function App() {
   const handleCardLike = (id, isLiked) => {
     const request = !isLiked
       ? // If not liked, send a request to add the user's id to the item's likes array
-        itemService.addCardLike(itemsBaseUrl, id)
+        itemService.addCardLike(wtwrApiBaseUrl, id)
       : // If liked, send a request to remove the user's id from the item's likes array
-        itemService.removeCardLike(itemsBaseUrl, id);
+        itemService.removeCardLike(wtwrApiBaseUrl, id);
 
     return request
       .then((response) => {
@@ -200,7 +200,7 @@ function App() {
   const handleConfirmDeleteItem = () => {
     if (modal.selectedItemId === -1) return;
     itemService
-      .deleteItem(itemsBaseUrl, modal.selectedItemId)
+      .deleteItem(wtwrApiBaseUrl, modal.selectedItemId)
       .then(() => {
         // Filter out the deleted item from the items list
         const newClothingItems = clothingItems.filter((item) => {
@@ -229,7 +229,7 @@ function App() {
   const handleAddItem = async (inputValues) => {
     try {
       const { data: newItem } = await itemService.addItem(
-        itemsBaseUrl,
+        wtwrApiBaseUrl,
         inputValues,
       );
       // Add new item to the beginning of the list
@@ -302,7 +302,7 @@ function App() {
 
     // Fetch all clothing items from the backend
     itemService
-      .getItems(itemsBaseUrl)
+      .getItems(wtwrApiBaseUrl)
       .then(({ data }) => {
         // Reverse the order to show newest items first
         setClothingItems(data.reverse());
